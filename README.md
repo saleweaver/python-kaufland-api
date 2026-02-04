@@ -115,4 +115,4 @@ Support ongoing development: https://github.com/sponsors/saleweaver
 
 ## DISCLAIMER
 
-We are not affiliated with
+We are not affiliated with kaufland
