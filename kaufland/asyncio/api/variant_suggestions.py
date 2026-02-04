@@ -9,9 +9,9 @@ class VariantSuggestions(Client):
     async def get_variant_suggestions_feed_list(self, **kwargs) -> ApiResponse:
         """
         Get import files
-        
+
         Get a list of all your import files. You can narrow down the search using various parameters.
-        
+
         Args:
         status: ProductCategoriesImportFileStatus | optional (query) The status of your import
         ts_created: str | optional (query) Creation timestamp of the import file in ISO 8601
@@ -20,31 +20,41 @@ class VariantSuggestions(Client):
         limit: int | optional (query) Desired size of result set. Max: 100
         offset: int | optional (query) Offset applied to result set
         """
-        return await self._request(kwargs.pop('path'), params=kwargs, add_storefront=False)
+        return await self._request(
+            kwargs.pop("path"), params=kwargs, add_storefront=False
+        )
 
     @kaufland_endpoint("/variant-suggestions/feed/upload-by-url", method="POST")
     async def upload_variant_suggestion_file_by_url(self, **kwargs) -> ApiResponse:
         """
         Add an import file URL
-        
+
         Saves an URL where a new import file is located.
         The file located at the URL will be downloaded and processed asynchronously and the contents imported.
         For the upload of product feed data there is a limit of 30 feeds per day, so please combine data for multiple products in one CSV file if possible.
-        
+
         Args:
         body: ProductCategoriesImportFileRequestBody | required (body) Json object with import file data
         """
-        body = kwargs.pop('body', None)
-        return await self._request(kwargs.pop('path'), data=body, params=kwargs, add_storefront=False)
+        body = kwargs.pop("body", None)
+        return await self._request(
+            kwargs.pop("path"), data=body, params=kwargs, add_storefront=False
+        )
 
     @kaufland_endpoint("/variant-suggestions/feed/{}", method="GET")
-    async def get_variant_suggestions_feed(self, id_import_file, **kwargs) -> ApiResponse:
+    async def get_variant_suggestions_feed(
+        self, id_import_file, **kwargs
+    ) -> ApiResponse:
         """
         Get import file by ID
-        
+
         Get an import file by its ID.
-        
+
         Args:
         id_import_file: int | required (path)
         """
-        return await self._request(fill_query_params(kwargs.pop('path'), id_import_file), params=kwargs, add_storefront=False)
+        return await self._request(
+            fill_query_params(kwargs.pop("path"), id_import_file),
+            params=kwargs,
+            add_storefront=False,
+        )

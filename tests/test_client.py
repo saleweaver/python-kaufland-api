@@ -2,9 +2,9 @@ import pytest
 
 from kaufland import Client
 from kaufland.asyncio import Client as AsyncClient
+from kaufland.base._core import sign_request
 from kaufland.base.ApiResponse import ApiResponse
 from kaufland.base.exceptions import ApiException
-from kaufland.base._core import sign_request
 
 
 class DummyTransport:

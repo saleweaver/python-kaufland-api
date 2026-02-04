@@ -1,11 +1,11 @@
-import pytest
 import httpx
+import pytest
 
+from kaufland.asyncio._transport_httpx import HttpxAsyncTransport
+from kaufland.base._transport_httpx import HttpxTransport
 from kaufland.base.ApiResponse import ApiResponse
 from kaufland.base.base_client import BaseClient
 from kaufland.base.decorators import kaufland_endpoint
-from kaufland.base._transport_httpx import HttpxTransport
-from kaufland.asyncio._transport_httpx import HttpxAsyncTransport
 
 
 def test_base_client_invalid_signature_encoding():

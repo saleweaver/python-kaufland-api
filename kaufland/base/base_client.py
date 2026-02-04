@@ -33,7 +33,10 @@ class BaseClient:
             "partner_client_key": partner_client_key,
             "partner_secret_key": partner_secret_key,
         }
-        credentials = {**credentials, **{k: v for k, v in provided.items() if v is not None}}
+        credentials = {
+            **credentials,
+            **{k: v for k, v in provided.items() if v is not None},
+        }
 
         self.credentials = CredentialProvider(
             account,
@@ -51,8 +54,7 @@ class BaseClient:
         )
         self.storefront = storefront or os.environ.get("KAUFLAND_STOREFRONT")
         self.signature_encoding = (
-            signature_encoding
-            or os.environ.get("KAUFLAND_SIGNATURE_ENCODING", "hex")
+            signature_encoding or os.environ.get("KAUFLAND_SIGNATURE_ENCODING", "hex")
         ).lower()
         if self.signature_encoding not in {"hex", "base64"}:
             raise ValueError("signature_encoding must be 'hex' or 'base64'")

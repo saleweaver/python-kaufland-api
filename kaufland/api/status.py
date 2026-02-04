@@ -1,5 +1,5 @@
 from kaufland import Client
-from kaufland.base import ApiResponse, fill_query_params, kaufland_endpoint
+from kaufland.base import ApiResponse, kaufland_endpoint
 
 
 class Status(Client):
@@ -9,7 +9,7 @@ class Status(Client):
     def ping(self, **kwargs) -> ApiResponse:
         """
         Ping the Marketplace Seller API by Kaufland
-        
+
         A simple method you can call that will return a constant value as long as everything is good.
         """
-        return self._request(kwargs.pop('path'), params=kwargs, add_storefront=False)
+        return self._request(kwargs.pop("path"), params=kwargs, add_storefront=False)

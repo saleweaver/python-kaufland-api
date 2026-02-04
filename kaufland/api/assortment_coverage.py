@@ -1,5 +1,5 @@
 from kaufland import Client
-from kaufland.base import ApiResponse, fill_query_params, kaufland_endpoint
+from kaufland.base import ApiResponse, kaufland_endpoint
 
 
 class AssortmentCoverage(Client):
@@ -12,4 +12,4 @@ class AssortmentCoverage(Client):
         offset: int | optional (query) Offset applied to result set
         limit: int | optional (query) Desired size of result set
         """
-        return self._request(kwargs.pop('path'), params=kwargs, add_storefront=False)
+        return self._request(kwargs.pop("path"), params=kwargs, add_storefront=False)

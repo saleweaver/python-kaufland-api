@@ -18,12 +18,25 @@ Sponsor = "https://github.com/sponsors/saleweaver"
 
 [project.optional-dependencies]
 dev = [
+    "build>=1.2.0",
+    "twine>=5.0.0",
+    "black>=24.0.0",
+    "ruff>=0.3.0",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+select = ["E", "F", "I"]
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]

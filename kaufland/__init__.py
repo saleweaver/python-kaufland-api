@@ -1,5 +1,9 @@
 from .base import ApiResponse, BaseClient, Client, fill_query_params, kaufland_endpoint
-from .base.exceptions import ApiException, KauflandException, MissingCredentialsException
+from .base.exceptions import (
+    ApiException,
+    KauflandException,
+    MissingCredentialsException,
+)
 
 __all__ = [
     "ApiResponse",

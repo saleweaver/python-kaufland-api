@@ -1,9 +1,9 @@
 import logging
 
+from ._core import parse_response, prepare_request, resolve_method
+from ._transport_httpx import HttpxTransport
 from .ApiResponse import ApiResponse
 from .base_client import BaseClient
-from ._core import prepare_request, parse_response, resolve_method
-from ._transport_httpx import HttpxTransport
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -48,7 +48,9 @@ class Client(BaseClient):
         )
 
         self.version = version
-        self._transport = HttpxTransport(timeout=timeout, proxies=proxies, verify=verify)
+        self._transport = HttpxTransport(
+            timeout=timeout, proxies=proxies, verify=verify
+        )
 
     def _request(
         self,

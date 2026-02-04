@@ -16,7 +16,9 @@ from kaufland.base.exceptions import ApiException
 
 
 class DummyResponse:
-    def __init__(self, status_code=200, headers=None, text="", json_data=None, json_raises=False):
+    def __init__(
+        self, status_code=200, headers=None, text="", json_data=None, json_raises=False
+    ):
         self.status_code = status_code
         self.headers = headers or {}
         self.text = text
@@ -52,7 +54,8 @@ def test_sign_request_base64():
     ).digest()
     expected = base64.b64encode(digest).decode("ascii")
     assert (
-        sign_request(method, uri, body, timestamp, secret, encoding="base64") == expected
+        sign_request(method, uri, body, timestamp, secret, encoding="base64")
+        == expected
     )
 
 
@@ -78,7 +81,7 @@ def test_prepare_request_adds_storefront_and_partner_headers():
     assert prepared["method"] == "POST"
     assert "storefront=de" in prepared["url"]
     assert "foo=bar" in prepared["url"]
-    assert prepared["content"] == b"{\"a\":1}"
+    assert prepared["content"] == b'{"a":1}'
     headers = prepared["headers"]
     assert headers["Shop-Client-Key"] == "ck"
     assert headers["Shop-Timestamp"] == "1411055926"

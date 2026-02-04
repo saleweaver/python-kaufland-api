@@ -130,7 +130,9 @@ def collect_args(op: dict) -> list[str]:
             content_schema = next(iter(content.values()), {})
             schema = content_schema.get("schema")
             if not description:
-                description = " ".join(((schema or {}).get("description") or "").split())
+                description = " ".join(
+                    ((schema or {}).get("description") or "").split()
+                )
         type_name = schema_type(schema)
         line = f"body: {type_name} | {required} (body)"
         if description:
@@ -140,17 +142,21 @@ def collect_args(op: dict) -> list[str]:
     return args
 
 
-def generate_class_code(class_name: str, operations: list[dict], *, async_mode: bool) -> str:
+def generate_class_code(
+    class_name: str, operations: list[dict], *, async_mode: bool
+) -> str:
     lines = []
     if async_mode:
         lines.append("from kaufland.asyncio import Client")
     else:
         lines.append("from kaufland import Client")
-    lines.append("from kaufland.base import ApiResponse, fill_query_params, kaufland_endpoint")
+    lines.append(
+        "from kaufland.base import ApiResponse, fill_query_params, kaufland_endpoint"
+    )
     lines.append("")
     lines.append("")
     lines.append(f"class {class_name}(Client):")
-    lines.append(f"    \"\"\"{class_name} Kaufland API Client.\"\"\"")
+    lines.append(f'    """{class_name} Kaufland API Client."""')
     lines.append("")
 
     used_method_names: set[str] = set()
@@ -168,8 +174,12 @@ def generate_class_code(class_name: str, operations: list[dict], *, async_mode: 
         else:
             signature = "(self, **kwargs) -> ApiResponse"
 
-        lines.append(f"    @kaufland_endpoint(\"{op['decorator_path']}\", method=\"{method}\")")
-        lines.append(f"    {'async ' if async_mode else ''}def {method_name}{signature}:")
+        lines.append(
+            f'    @kaufland_endpoint("{op["decorator_path"]}", method="{method}")'
+        )
+        lines.append(
+            f"    {'async ' if async_mode else ''}def {method_name}{signature}:"
+        )
 
         doc_lines = build_docstring(op.get("summary"), op.get("description"))
         args = collect_args(op.get("raw", {}))
@@ -188,10 +198,12 @@ def generate_class_code(class_name: str, operations: list[dict], *, async_mode: 
             for doc_line in doc_lines:
                 lines.append(f"        {doc_line}")
         else:
-            lines.append("        \"\"\"\"\"")
+            lines.append('        """""')
 
         if path_params:
-            path_expr = f"fill_query_params(kwargs.pop('path'), {', '.join(param_names)})"
+            path_expr = (
+                f"fill_query_params(kwargs.pop('path'), {', '.join(param_names)})"
+            )
         else:
             path_expr = "kwargs.pop('path')"
 
@@ -199,9 +211,7 @@ def generate_class_code(class_name: str, operations: list[dict], *, async_mode: 
         has_body = op["has_body"]
         if has_body:
             lines.append("        body = kwargs.pop('body', None)")
-            request = (
-                f"{path_expr}, data=body, params=kwargs, add_storefront={add_storefront}"
-            )
+            request = f"{path_expr}, data=body, params=kwargs, add_storefront={add_storefront}"
         else:
             request = f"{path_expr}, params=kwargs, add_storefront={add_storefront}"
 
@@ -218,7 +228,9 @@ def generate_class_code(class_name: str, operations: list[dict], *, async_mode: 
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate Kaufland API clients from swagger.json")
+    parser = argparse.ArgumentParser(
+        description="Generate Kaufland API clients from swagger.json"
+    )
     parser.add_argument("--swagger", default="swagger.json")
     parser.add_argument("--sync-out", default="kaufland/api")
     parser.add_argument("--async-out", default="kaufland/asyncio/api")
@@ -285,8 +297,12 @@ def main() -> int:
         async_init_lines.append(f"    '{name}',")
     async_init_lines.append("]")
 
-    (sync_out / "__init__.py").write_text("\n".join(sync_init_lines) + "\n", encoding="utf-8")
-    (async_out / "__init__.py").write_text("\n".join(async_init_lines) + "\n", encoding="utf-8")
+    (sync_out / "__init__.py").write_text(
+        "\n".join(sync_init_lines) + "\n", encoding="utf-8"
+    )
+    (async_out / "__init__.py").write_text(
+        "\n".join(async_init_lines) + "\n", encoding="utf-8"
+    )
 
     return 0
 
