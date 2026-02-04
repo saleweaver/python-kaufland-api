@@ -1,4 +1,4 @@
-# kaufland
+# python-kaufland-api
 
 Python wrapper for the Kaufland Marketplace Seller API. 
 There are clients for both sync and async usage, all available endpoints are included.
@@ -110,3 +110,7 @@ uv run python tools/generate_clients.py
 ## Sponsorship
 
 Support ongoing development: https://github.com/sponsors/saleweaver
+
+## DISCLAIMER
+
+We are not affiliated with
