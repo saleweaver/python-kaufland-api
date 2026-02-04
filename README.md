@@ -7,6 +7,8 @@ This is the first commit, documentation will follow. Please refer to this README
 
 ## Install
 
+[![Badge](https://img.shields.io/pypi/v/python-kaufland-api?style=for-the-badge)](https://pypi.org/project/python-kaufland-api/)
+
 ```bash
 pip install python-kaufland-api
 ```
