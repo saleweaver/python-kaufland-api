@@ -9,14 +9,12 @@ from kaufland.base.exceptions import MissingCredentialsException
 def test_credentials_from_env(monkeypatch):
     monkeypatch.setenv("KAUFLAND_CLIENT_KEY", "ck")
     monkeypatch.setenv("KAUFLAND_SECRET_KEY", "sk")
-    monkeypatch.setenv("KAUFLAND_USER_AGENT", "ua")
     monkeypatch.setenv("KAUFLAND_PARTNER_CLIENT_KEY", "pck")
     monkeypatch.setenv("KAUFLAND_PARTNER_SECRET_KEY", "psk")
 
     provider = CredentialProvider("default", credentials=None)
     assert provider.credentials["client_key"] == "ck"
     assert provider.credentials["secret_key"] == "sk"
-    assert provider.credentials["user_agent"] == "ua"
     assert provider.credentials["partner_client_key"] == "pck"
     assert provider.credentials["partner_secret_key"] == "psk"
 

@@ -5,6 +5,7 @@ from .credential_provider import CredentialProvider
 
 class BaseClient:
     default_endpoint = "https://sellerapi.kaufland.com/v2"
+    user_agent = "saleweaver-python-kaufland-api"
 
     def __init__(
         self,
@@ -14,7 +15,6 @@ class BaseClient:
         credential_providers=None,
         client_key=None,
         secret_key=None,
-        user_agent=None,
         partner_client_key=None,
         partner_secret_key=None,
         signature_encoding=None,
@@ -30,7 +30,6 @@ class BaseClient:
         provided = {
             "client_key": client_key,
             "secret_key": secret_key,
-            "user_agent": user_agent,
             "partner_client_key": partner_client_key,
             "partner_secret_key": partner_secret_key,
         }
@@ -46,12 +45,6 @@ class BaseClient:
         self.secret_key = self.credentials["secret_key"]
         self.partner_client_key = self.credentials.get("partner_client_key")
         self.partner_secret_key = self.credentials.get("partner_secret_key")
-        self.user_agent = (
-            user_agent
-            or self.credentials.get("user_agent")
-            or os.environ.get("KAUFLAND_USER_AGENT")
-            or "kaufland-python"
-        )
 
         self.endpoint = endpoint or os.environ.get(
             "KAUFLAND_API_ENDPOINT", self.default_endpoint

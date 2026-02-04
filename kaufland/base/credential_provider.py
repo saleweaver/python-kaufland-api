@@ -28,7 +28,6 @@ class CredentialProvider:
         env = {
             "client_key": os.environ.get("KAUFLAND_CLIENT_KEY"),
             "secret_key": os.environ.get("KAUFLAND_SECRET_KEY"),
-            "user_agent": os.environ.get("KAUFLAND_USER_AGENT"),
             "partner_client_key": os.environ.get("KAUFLAND_PARTNER_CLIENT_KEY"),
             "partner_secret_key": os.environ.get("KAUFLAND_PARTNER_SECRET_KEY"),
         }

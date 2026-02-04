@@ -20,6 +20,7 @@ Use `swagger.json` and the official Kaufland docs for endpoints/headers. The PHP
   `Accept: application/json`
   `Content-Type: application/json` when body present
   `Shop-Client-Key`, `Shop-Timestamp`, `Shop-Signature`, `User-Agent`
+- `User-Agent` is fixed to `saleweaver-python-kaufland-api` (not configurable).
 - Signature encoding is configurable (`hex` default, `base64` optional).
 - Partner credentials (if provided) must add:
   `Shop-Partner-Client-Key`, `Shop-Partner-Signature`

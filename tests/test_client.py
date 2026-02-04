@@ -50,7 +50,6 @@ def test_client_request_builds_headers_and_url():
     client = Client(
         client_key="ck",
         secret_key="sk",
-        user_agent="ua",
         storefront="de",
         signature_encoding="hex",
     )
@@ -68,7 +67,7 @@ def test_client_request_builds_headers_and_url():
     assert "embedded=category" in req["url"]
     headers = req["headers"]
     assert headers["Shop-Client-Key"] == "ck"
-    assert headers["User-Agent"] == "ua"
+    assert headers["User-Agent"] == "saleweaver-python-kaufland-api"
     assert "Shop-Signature" in headers
 
 
@@ -78,7 +77,6 @@ def test_client_respects_custom_timestamp_header():
     client = Client(
         client_key="ck",
         secret_key="sk",
-        user_agent="ua",
         storefront="de",
         signature_encoding="hex",
     )

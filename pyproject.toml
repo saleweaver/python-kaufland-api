@@ -7,6 +7,9 @@ dependencies = [
     "httpx>=0.27.0",
 ]
 
+[project.urls]
+Sponsor = "https://github.com/sponsors/saleweaver"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
